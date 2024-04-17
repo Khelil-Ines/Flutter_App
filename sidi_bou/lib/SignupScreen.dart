@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -14,13 +15,40 @@ class _SignupScreenState extends State<SignupScreen> {
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
-  Future SignUp() async {
-    if (passwordConfirmed()) {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
+  Future<void> SignUp() async {
+    try {
+      if (passwordConfirmed()) {
+        UserCredential userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userCredential.user!.uid)
+            .set({
+          'email': _emailController.text.trim(),
+          'password': _passwordController.text.trim(),
+        });
+        Navigator.of(context).pushNamed('LoginScreen');
+      }
+    } catch (e) {
+      print('Une erreur s\'est produite lors de l\'inscription : $e');
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Erreur'),
+          content: Text(
+              'Une erreur s\'est produite lors de la création de votre compte.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text('OK'),
+            ),
+          ],
+        ),
       );
-      // Navigator.of(context).pushNamed('/');
     }
   }
 
@@ -32,9 +60,10 @@ class _SignupScreenState extends State<SignupScreen> {
       return false;
     }
   }
-  // void openLoginScreen() {
-  //   Navigator.of(context).pushReplacementNamed('LoginScreen');
-  // }
+
+  void openLoginScreen() {
+    Navigator.of(context).pushReplacementNamed('LoginScreen');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -167,14 +196,14 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                     ),
                     GestureDetector(
-                        // onTap: openLoginScreen,
+                        onTap: openLoginScreen,
                         child: Text(
-                      'Sign in here',
-                      style: GoogleFonts.robotoCondensed(
-                        color: Colors.red[500],
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ))
+                          'Sign in here',
+                          style: GoogleFonts.robotoCondensed(
+                            color: Colors.red[500],
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ))
                   ],
                 )
               ],

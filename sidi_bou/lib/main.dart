@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sidi_bou/auth.dart';
 import 'package:sidi_bou/firebase_options.dart';
 import './SignupScreen.dart';
+import './LoginScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
@@ -26,8 +27,8 @@ class MyApp extends StatelessWidget {
       routes: {
         // '/': (context) => const Auth(),
         // 'HomeScreen': (context) => const HomeScreen(),
-        // 'SignUpScreen': (context) => const SignupScreen(),
-        // 'LoginScreen': (context) => const LoginScreen(),
+        'SignUpScreen': (context) => const SignupScreen(),
+        'LoginScreen': (context) => const LoginScreen(),
       },
     );
   }
