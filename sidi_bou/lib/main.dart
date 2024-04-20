@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sidi_bou/MapScreen.dart';
+import 'package:sidi_bou/RateScreen.dart';
 import 'package:sidi_bou/auth.dart';
 import 'package:sidi_bou/firebase_options.dart';
 import './SignupScreen.dart';
@@ -31,6 +33,8 @@ class MyApp extends StatelessWidget {
         'HomeScreen': (context) => const HomeScreen(),
         'SignUpScreen': (context) => const SignupScreen(),
         'LoginScreen': (context) => const LoginScreen(),
+        'RateScreen': (context) => const RateScreen(),
+        'MapScreen': (context) => const MapScreen(),
       },
     );
   }
