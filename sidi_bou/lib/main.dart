@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sidi_bou/auth.dart';
 import 'package:sidi_bou/firebase_options.dart';
+import 'package:sidi_bou/settings/set_account.dart';
+import 'package:sidi_bou/settings/settings_page.dart';
 import './SignupScreen.dart';
 import './LoginScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -28,6 +30,7 @@ class MyApp extends StatelessWidget {
       home: const Auth(),
       routes: {
         // '/': (context) => const Auth(),
+        'settings_page.dart': (context) => const SettingsPage(),
         'HomeScreen': (context) => const HomeScreen(),
         'SignUpScreen': (context) => const SignupScreen(),
         'LoginScreen': (context) => const LoginScreen(),
