@@ -1,5 +1,6 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
-import 'package:sidi_bou/MapScreen.dart';
 import 'package:sidi_bou/RateScreen.dart';
 import 'package:sidi_bou/auth.dart';
 import 'package:sidi_bou/firebase_options.dart';
@@ -7,6 +8,7 @@ import './SignupScreen.dart';
 import './LoginScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import './HomeScreen.dart';
+import 'package:sidi_bou/settings/settings_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,11 +32,12 @@ class MyApp extends StatelessWidget {
       home: const Auth(),
       routes: {
         // '/': (context) => const Auth(),
+        'SettingScreen': (context) => const SettingsPage(),
         'HomeScreen': (context) => const HomeScreen(),
         'SignUpScreen': (context) => const SignupScreen(),
         'LoginScreen': (context) => const LoginScreen(),
         'RateScreen': (context) => const RateScreen(),
-        'MapScreen': (context) => const MapScreen(),
+        //'MapScreen': (context) => ,
       },
     );
   }

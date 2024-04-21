@@ -125,7 +125,7 @@ class navigation_drawer extends StatelessWidget {
               color: Color.fromARGB(255, 9, 51, 110),
             ), // Add leading icon for Maps
             onTap: () {
-              Navigator.of(context).pushReplacementNamed('MapScreen');
+              //Navigator.of(context).pushReplacementNamed('MapScreen');
             },
           ),
           ListTile(
@@ -137,7 +137,9 @@ class navigation_drawer extends StatelessWidget {
               Icons.settings,
               color: Color.fromARGB(255, 9, 51, 110),
             ), // Add leading icon for Settings
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed('SettingScreen');
+            },
           ),
           ListTile(
             title: const Text(
