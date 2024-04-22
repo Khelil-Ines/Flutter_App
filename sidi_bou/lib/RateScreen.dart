@@ -78,7 +78,7 @@ class _RateScreenState extends State<RateScreen> {
         title: Padding(
           padding: EdgeInsets.only(left: 80.0),
           child: Text(
-            'Rate our App !',
+            'Rate our App ⭐ !',
             style: GoogleFonts.robotoCondensed(
               fontSize: 18,
               fontWeight: FontWeight.bold,

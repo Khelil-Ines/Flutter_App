@@ -1,7 +1,9 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:sidi_bou/HistoriqueScreen.dart';
 import 'package:sidi_bou/RateScreen.dart';
+import 'package:sidi_bou/VoiceCommentScreen.dart';
 import 'package:sidi_bou/auth.dart';
 import 'package:sidi_bou/firebase_options.dart';
 import './SignupScreen.dart';
@@ -37,7 +39,8 @@ class MyApp extends StatelessWidget {
         'SignUpScreen': (context) => const SignupScreen(),
         'LoginScreen': (context) => const LoginScreen(),
         'RateScreen': (context) => const RateScreen(),
-        //'MapScreen': (context) => ,
+        'VoiceCommentScreen': (context) => const VoiceCommentScreen(),
+        'HistoriqueScreen': (context) => const HistoriqueScreen(),
       },
     );
   }
