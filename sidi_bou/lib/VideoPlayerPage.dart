@@ -16,7 +16,7 @@ class VideoPlayerPage extends StatefulWidget {
 class _VideoPlayerPageState extends State<VideoPlayerPage> {
   late CustomVideoPlayerController _customVideoPlayerController;
 
-  Source currentSource = Source.Asset;
+  Source currentSource = Source.Network;
 
   Uri videoUri = Uri.parse(
       //"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4");
