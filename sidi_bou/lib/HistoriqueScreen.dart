@@ -16,9 +16,9 @@ class _HistoriqueScreenState extends State<HistoriqueScreen> {
       drawer: navigation_drawer(),
       appBar: AppBar(
         title: Padding(
-          padding: EdgeInsets.only(left: 30.0),
+          padding: EdgeInsets.only(left: 20.0),
           child: Text(
-            'Learn more about Sidi Bou Said !',
+            'Learn more about Sidi Bou Said 🪬!',
             style: GoogleFonts.robotoCondensed(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -76,8 +76,7 @@ class _HistoriqueScreenState extends State<HistoriqueScreen> {
               const Spacer(),
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context)
-                      .pushReplacementNamed('HistoriqueScreen');
+                  Navigator.of(context).pushReplacementNamed('VideoScreen');
                 },
                 child: Container(
                   padding: const EdgeInsets.all(24),
@@ -86,7 +85,7 @@ class _HistoriqueScreenState extends State<HistoriqueScreen> {
                     color: Colors.blue[900],
                   ),
                   child: const Text(
-                    "Start Quizz",
+                    "Watch Videos",
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,

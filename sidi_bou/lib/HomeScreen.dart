@@ -16,9 +16,9 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: navigation_drawer(),
       appBar: AppBar(
         title: Padding(
-          padding: EdgeInsets.only(left: 50.0),
+          padding: EdgeInsets.only(left: 40.0),
           child: Text(
-            'Welcome to Sidi Bou App !',
+            'Welcome to Sidi Bou App 🪬!',
             style: GoogleFonts.robotoCondensed(
               fontSize: 18,
               fontWeight: FontWeight.bold,

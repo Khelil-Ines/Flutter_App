@@ -105,6 +105,19 @@ class navigation_drawer extends StatelessWidget {
           ),
           ListTile(
             title: const Text(
+              'Video',
+              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            ),
+            leading: const Icon(
+              Icons.video_file,
+              color: Color.fromARGB(255, 9, 51, 110),
+            ), // Add leading icon for Quizz
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed('VideoScreen');
+            },
+          ),
+          ListTile(
+            title: const Text(
               'Quizz',
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
@@ -113,8 +126,7 @@ class navigation_drawer extends StatelessWidget {
               color: Color.fromARGB(255, 9, 51, 110),
             ), // Add leading icon for Quizz
             onTap: () {
-              // Update the state of the app.
-              // ...
+              Navigator.of(context).pushReplacementNamed('QuizzScreen');
             },
           ),
           ListTile(
@@ -127,7 +139,7 @@ class navigation_drawer extends StatelessWidget {
               color: Color.fromARGB(255, 9, 51, 110),
             ), // Add leading icon for Maps
             onTap: () {
-              Navigator.of(context).pushReplacementNamed('VoiceCommentScreen');
+              Navigator.of(context).pushReplacementNamed('MapScreen');
             },
           ),
           ListTile(
