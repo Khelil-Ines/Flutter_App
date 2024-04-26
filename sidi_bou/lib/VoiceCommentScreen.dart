@@ -139,6 +139,7 @@
 //   }
 // }
 import 'package:flutter/material.dart';
+import 'package:sidi_bou/core/Config.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore
 import 'navigation_drawer.dart';
@@ -262,7 +263,7 @@ class _VoiceCommentScreenState extends State<VoiceCommentScreen> {
         title: Padding(
           padding: EdgeInsets.only(left: 60.0),
           child: Text(
-            'Leave a comment 🙏🏻  !',
+            Config.Localization["comment"],
             style: GoogleFonts.robotoCondensed(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -278,10 +279,10 @@ class _VoiceCommentScreenState extends State<VoiceCommentScreen> {
               padding: EdgeInsets.all(16),
               child: Text(
                 _speechToText.isListening
-                    ? "listening..."
+                    ? Config.Localization["comment"]
                     : _speechEnabled
-                        ? "Tap the microphone to start listening..."
-                        : "Speech not available",
+                        ? Config.Localization["tapMic"]
+                        : Config.Localization["notAvailable"],
                 style: TextStyle(
                     fontSize: 20.0,
                     color: Colors.red,
@@ -294,7 +295,7 @@ class _VoiceCommentScreenState extends State<VoiceCommentScreen> {
                 child: TextField(
                   controller: _commentController,
                   decoration: InputDecoration(
-                    hintText: 'Your comment here ...',
+                    hintText: Config.Localization["yourCmt"],
                     border: OutlineInputBorder(),
                   ),
                   maxLines: null,
@@ -329,7 +330,7 @@ class _VoiceCommentScreenState extends State<VoiceCommentScreen> {
               height: 50.0,
               child: ElevatedButton(
                 onPressed: _submitComment,
-                child: Text('Submit Comment',
+                child: Text(Config.Localization["btnRate"],
                     style: TextStyle(color: Colors.white)),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue[900],
@@ -355,4 +356,3 @@ class _VoiceCommentScreenState extends State<VoiceCommentScreen> {
     );
   }
 }
-

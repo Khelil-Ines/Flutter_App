@@ -171,8 +171,8 @@ class navigation_drawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text(
-              'Leave a comment',
+            title: Text(
+              Config.Localization["cmt"],
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
             leading: const Icon(

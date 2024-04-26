@@ -1,5 +1,7 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sidi_bou/HistoriqueScreen.dart';
 import 'package:sidi_bou/MapScreen.dart';
 import 'package:sidi_bou/QuizzScreens/QuizzHome.dart';
@@ -8,6 +10,7 @@ import 'package:sidi_bou/VoiceCommentScreen.dart';
 import 'package:sidi_bou/auth.dart';
 import 'package:sidi_bou/core/Config.dart';
 import 'package:sidi_bou/firebase_options.dart';
+import 'package:sidi_bou/manager/lang_cubit.dart';
 import 'package:sidi_bou/videoplayerpage.dart';
 import './SignupScreen.dart';
 import './LoginScreen.dart';
@@ -17,7 +20,9 @@ import 'package:sidi_bou/settings/settings_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Config.LoadLanguage('fr');
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  String lang = preferences.getString("lang")??"en";
+  await Config.LoadLanguage(lang);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
@@ -27,28 +32,30 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Sidi Bou Said',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return BlocProvider(
+      create: (BuildContext context) => LangCubit(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Sidi Bou Said',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: const HomeScreen(),
+        routes: {
+          // '/': (context) => const Auth(),
+          'SettingScreen': (context) => const SettingsPage(),
+          'HomeScreen': (context) => const HomeScreen(),
+          'MapScreen': (context) => const MapScreen(),
+          'SignUpScreen': (context) => const SignupScreen(),
+          'LoginScreen': (context) => const LoginScreen(),
+          'RateScreen': (context) => const RateScreen(),
+          'VoiceCommentScreen': (context) => const VoiceCommentScreen(),
+          'HistoriqueScreen': (context) => const HistoriqueScreen(),
+          'QuizzScreen': (context) => const QuizzHome(),
+          'VideoScreen': (context) => const VideoPlayerPage()
+        },
       ),
-      home: const HomeScreen(),
-      routes: {
-        // '/': (context) => const Auth(),
-        'SettingScreen': (context) => const SettingsPage(),
-        'HomeScreen': (context) => const HomeScreen(),
-        'MapScreen': (context) => const MapScreen(),
-        'SignUpScreen': (context) => const SignupScreen(),
-        'LoginScreen': (context) => const LoginScreen(),
-        'RateScreen': (context) => const RateScreen(),
-        'VoiceCommentScreen': (context) => const VoiceCommentScreen(),
-        'HistoriqueScreen': (context) => const HistoriqueScreen(),
-        'QuizzScreen': (context) => const QuizzHome(),
-        'VideoScreen': (context) => const VideoPlayerPage()
-
-      },
     );
   }
 }
