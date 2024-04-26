@@ -2,6 +2,7 @@ import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sidi_bou/core/Config.dart';
 import 'navigation_drawer.dart';
 
 enum Source { Asset, Network }
@@ -45,7 +46,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
         title: Padding(
           padding: EdgeInsets.only(left: 20.0),
           child: Text(
-            'Discover Sidi Bou Said 🪬!',
+            Config.Localization["discover"],
             style: GoogleFonts.robotoCondensed(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -82,8 +83,8 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
       children: [
         MaterialButton(
           color: Colors.blue,
-          child: const Text(
-            "Network",
+          child: Text(
+            Config.Localization["network"],
             style: TextStyle(
               color: Colors.white,
             ),
@@ -97,8 +98,8 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
         ),
         MaterialButton(
           color: Colors.blue,
-          child: const Text(
-            "Asset",
+          child: Text(
+            Config.Localization["asset"],
             style: TextStyle(
               color: Colors.white,
             ),
@@ -124,8 +125,8 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                     borderRadius: BorderRadius.circular(16),
                     color: Colors.blue[900],
                   ),
-                  child: const Text(
-                    "Start Quizz",
+                  child: Text(
+                    Config.Localization["quizz"],
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,

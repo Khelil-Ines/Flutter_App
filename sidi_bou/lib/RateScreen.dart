@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sidi_bou/core/Config.dart';
 import 'package:sidi_bou/smiley_controller.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -39,7 +40,7 @@ class _RateScreenState extends State<RateScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              'Thank you for your rating!',
+            Config.Localization["rate"],
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
             ),
@@ -55,7 +56,7 @@ class _RateScreenState extends State<RateScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'Ooops! an error accured, please try again!',
+            Config.Localization["error"],
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
           ),
@@ -77,7 +78,7 @@ class _RateScreenState extends State<RateScreen> {
         title: Padding(
           padding: EdgeInsets.only(left: 80.0),
           child: Text(
-            'Rate our App ⭐ !',
+            Config.Localization["rate"],
             style: GoogleFonts.robotoCondensed(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -117,7 +118,7 @@ class _RateScreenState extends State<RateScreen> {
                     ),
                     child: Center(
                         child: Text(
-                      'slide to select rating',
+                      Config.Localization["slide"],
                       style: TextStyle(color: Colors.white),
                     ))),
                 SizedBox(
@@ -158,7 +159,7 @@ class _RateScreenState extends State<RateScreen> {
                   height: 50.0,
                   child: ElevatedButton(
                     onPressed: () => _submitRating(),
-                    child: Text('Submit Rating',
+                    child: Text(Config.Localization["btnRate"],
                         style: TextStyle(color: Colors.white)),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue[900],
