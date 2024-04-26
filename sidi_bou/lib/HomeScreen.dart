@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sidi_bou/core/Config.dart';
 import 'package:sidi_bou/navigation_drawer.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,7 +18,9 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Center(
           child: Text(
-            'Welcome to Sidi Bou App 🪬!',
+
+            Config.Localization["title"],
+
             style: GoogleFonts.robotoCondensed(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -54,7 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(28.0),
                     child: Text(
-                      'Sidi Bou Said,       THE place to be 🧿!',
+                      Config.Localization["body"],
+
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.white,
@@ -71,7 +75,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   //   color: Colors.white.withOpacity(0.6),
                   // ),
                   child: Text(
-                    'Press to begin!',
+
+                    Config.Localization["press"],
+
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
@@ -90,8 +96,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: BorderRadius.circular(16),
                       color: Colors.blue[900],
                     ),
-                    child: const Text(
-                      "Get Started",
+
+                    child: Text(
+                      Config.Localization["btnStart"],
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

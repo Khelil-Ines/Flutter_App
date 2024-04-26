@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sidi_bou/core/Config.dart';
 import 'package:sidi_bou/navigation_drawer.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -15,9 +16,10 @@ class _HistoriqueScreenState extends State<HistoriqueScreen> {
     return Scaffold(
       drawer: navigation_drawer(),
       appBar: AppBar(
-        title: Center(
+        title: Padding(
+          padding: EdgeInsets.only(left: 20.0),
           child: Text(
-            'Learn more about Sidi Bou Said 🪬!',
+            Config.Localization["learn"],
             style: GoogleFonts.robotoCondensed(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -30,7 +32,8 @@ class _HistoriqueScreenState extends State<HistoriqueScreen> {
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('images/history.png'),
+              image: NetworkImage(
+                  "https://www.boky.tn/wp-content/uploads/2023/07/The-beautiful-towns-of-Northern-Tunisia-Bizerte-and-Sidi-Bou-Said.png"), // Replace with your image URL
               fit: BoxFit.fill,
             ),
           ),
@@ -51,7 +54,7 @@ class _HistoriqueScreenState extends State<HistoriqueScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(28.0),
                   child: Text(
-                    'Sidi Bou Said (Arabic: سيدي بو سعيد Sīdi Bū Sʻīdⓘ) is a town in northern Tunisia located about 20 km northeast from the capital, Tunis. Cafe de delice and coast view Named after a religious figure who lived there, Abu Said al-Baji, it was previously called Jabal el-Menar. The town itself is a tourist attraction and is known for its extensive use of blue and white. It can be reached by a TGM train, which runs from Tunis to La Marsa. In the 12th century/13th century AD Abu Said Ibn Khalaf Yahya al-Tamimi al-Beji arrived in the village of Jabal el-Menar and established a sanctuary. After his death in 1231, he was buried there. In the 18th century wealthy citizens of Tunis built residences in Sidi Bou Said. During the 1920s, Rodolphe d\'Erlanger introduced the blue-white theme to the town. His home, Ennejma Ezzahra, is now a museum that has a collection of musical instruments, and organizes concerts of classical and Arabic music',
+                    Config.Localization["description"],
                     textAlign: TextAlign.center,
                     style: GoogleFonts.notoSerif(
                         fontSize: 12, fontWeight: FontWeight.bold),
@@ -63,7 +66,7 @@ class _HistoriqueScreenState extends State<HistoriqueScreen> {
                   color: Colors.white.withOpacity(0.6),
                 ),
                 child: Text(
-                  'Press to play!',
+                  Config.Localization["btnPlay"],
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16,
@@ -82,8 +85,8 @@ class _HistoriqueScreenState extends State<HistoriqueScreen> {
                     borderRadius: BorderRadius.circular(16),
                     color: Colors.blue[900],
                   ),
-                  child: const Text(
-                    "Watch Videos",
+                  child: Text(
+                    Config.Localization["videos"],
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -100,3 +103,4 @@ class _HistoriqueScreenState extends State<HistoriqueScreen> {
     );
   }
 }
+
