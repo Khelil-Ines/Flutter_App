@@ -45,6 +45,10 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Permission required to record audio for speech recognition</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Permission required to record audio for speech recognition</string>
 	<string>NSLocationWhenInUseUsageDescription</string>
 	<key>Want to display location on map, and track it.</key>
 	<string>NSLocationAlwaysAndWhenInUseUsageDescription</string>

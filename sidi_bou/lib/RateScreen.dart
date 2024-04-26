@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sidi_bou/smiley_controller.dart';
 import 'package:flare_flutter/flare_actor.dart';
-import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'navigation_drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -78,7 +77,7 @@ class _RateScreenState extends State<RateScreen> {
         title: Padding(
           padding: EdgeInsets.only(left: 80.0),
           child: Text(
-            'Rate our App !',
+            'Rate our App ⭐ !',
             style: GoogleFonts.robotoCondensed(
               fontSize: 18,
               fontWeight: FontWeight.bold,
