@@ -12,13 +12,30 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>(); // Add a form key
+  String? _errorMessage;
 
-  Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: _emailController.text.trim(),
-      password: _passwordController.text.trim(),
-    );
-    Navigator.of(context).pushNamed('HomeScreen');
+  Future<void> signIn() async {
+    if (_formKey.currentState!.validate()) {
+      // Validate form before sign in
+      // Form is valid, proceed with sign in logic
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+        Navigator.of(context).pushNamed('HomeScreen');
+      } on FirebaseAuthException catch (error) {
+        setState(() {
+          _errorMessage = error.message; // Set error message
+        });
+      }
+    } else {
+      setState(() {
+        _errorMessage =
+            "Please fill all fields before signing in"; // Set error message for empty fields
+      });
+    }
   }
 
   void openSignupScreen() {
@@ -39,126 +56,142 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Image
-                Image.asset(
-                  'images/mascotte.png',
-                  height: 150,
-                ),
-                SizedBox(height: 20),
-
-                // Title
-                Text(
-                  'Sign In',
-                  style: GoogleFonts.robotoCondensed(
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
+            child: Form(
+              key: _formKey, // Assign the form key to the Form widget
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Image
+                  Image.asset(
+                    'images/mascotte.png',
+                    height: 100,
                   ),
-                ),
-
-                // Subtitle
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'Welcome back! Nice to see you again',
-                    style: GoogleFonts.robotoCondensed(fontSize: 18),
-                  ),
-                ),
-
-                // Email TextField
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
+                  SizedBox(height: 20),
+                  // Title
+                  Text(
+                    'Sign In',
+                    style: GoogleFonts.robotoCondensed(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: TextField(
+                  ),
+                  // Subtitle
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Welcome back! Nice to see you again',
+                      style: GoogleFonts.robotoCondensed(fontSize: 18),
+                    ),
+                  ),
+                  // Email TextField
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: TextFormField(
                         controller: _emailController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter your email";
+                          }
+                          return null; // No error if validation passes
+                        },
                         decoration: InputDecoration(
-                          border: InputBorder.none,
+                          border: OutlineInputBorder(),
                           hintText: 'Email',
                         ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(height: 20),
-                // Password TextField
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: TextField(
+                  SizedBox(height: 20),
+                  // Password TextField
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: TextFormField(
                         controller: _passwordController,
                         obscureText: true,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter your password";
+                          }
+                          return null; // No error if validation passes
+                        },
                         decoration: InputDecoration(
-                          border: InputBorder.none,
+                          border: OutlineInputBorder(),
                           hintText: 'Password',
                         ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(height: 15),
-
-                // Login Button
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: GestureDetector(
-                    onTap: signIn,
-                    child: Container(
-                      padding: EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                          color: Colors.red[700],
-                          borderRadius: BorderRadius.circular(12)),
-                      child: Center(
-                        child: Text(
-                          'Sign in',
-                          style: GoogleFonts.robotoCondensed(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                  SizedBox(height: 15),
+                  // Login Button
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: GestureDetector(
+                      onTap: signIn,
+                      child: Container(
+                        padding: EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                            color: Colors.red[700],
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Center(
+                          child: Text(
+                            'Sign in',
+                            style: GoogleFonts.robotoCondensed(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(height: 20),
-
-                //text signup
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Don\'t have an account?',
-                      style: GoogleFonts.robotoCondensed(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: openSignupScreen,
+                  SizedBox(height: 20),
+                  // Error message
+                  if (_errorMessage != null)
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        'Sign up here',
-                        style: GoogleFonts.robotoCondensed(
-                          color: Colors.red[500],
+                        _errorMessage!,
+                        style: TextStyle(
+                          color: Colors.red,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                  ],
-                )
-              ],
+                  // Text signup
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Don\'t have an account?',
+                        style: GoogleFonts.robotoCondensed(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: openSignupScreen,
+                        child: Text(
+                          'Sign up here',
+                          style: GoogleFonts.robotoCondensed(
+                            color: Colors.red[500],
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         ),

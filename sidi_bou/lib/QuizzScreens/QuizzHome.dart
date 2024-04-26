@@ -32,27 +32,19 @@ class _QuizzHomeState extends State<QuizzHome> {
           Container(
             width: MediaQuery.of(context).size.width,
             height: 200,
-            padding:
-                EdgeInsets.only(left: 120.0, right: 110, top: 20, bottom: 20),
             decoration: BoxDecoration(
               color: Colors.red[400],
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(50),
                 bottomRight: Radius.circular(50),
               ),
-            ),
-            child: Row(
-              children: [
-                Image(
-                  image: NetworkImage(
-                      'https://cdn-icons-png.flaticon.com/512/8776/8776742.png'),
-                ),
-              ],
+              image: DecorationImage(
+                image: AssetImage('images/quizz.png'),
+              ),
             ),
           ),
           SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.only(right: 200.0),
+          Center(
             child: Text(
               'Top Quizz Categories',
               style: TextStyle(
@@ -151,3 +143,4 @@ class _QuizzHomeState extends State<QuizzHome> {
     );
   }
 }
+
