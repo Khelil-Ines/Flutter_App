@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:sidi_bou/HomeScreen.dart';
+import 'package:sidi_bou/core/Config.dart';
 import 'package:sidi_bou/settings/set_account.dart';
 import 'package:sidi_bou/widgets/forward_button.dart';
 import 'package:sidi_bou/widgets/setting_item.dart';
@@ -38,15 +39,16 @@ class _SettingsPageState extends State<SettingsPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Settings',
-                style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+              Text(
+                Config.Localization["settings"],
+                style:
+                    const TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
               ),
               const SizedBox(
                 height: 30,
               ),
-              const Text(
-                'Account',
+              Text(
+                Config.Localization["account"],
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w500,
@@ -54,7 +56,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               const SizedBox(height: 20),
               SettingItem(
-                title: "Your Account",
+                title: Config.Localization["yourAcc"],
                 icon: Ionicons.person,
                 bgColor: Colors.blue.shade100,
                 iconColor: Colors.blue,
@@ -70,8 +72,8 @@ class _SettingsPageState extends State<SettingsPage> {
               const SizedBox(
                 height: 40,
               ),
-              const Text(
-                "Settings",
+              Text(
+                Config.Localization["general"],
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w500,
@@ -79,7 +81,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               const SizedBox(height: 20),
               SettingItem(
-                title: "Language",
+                title: Config.Localization["lang"],
                 icon: Ionicons.earth,
                 bgColor: Colors.orange.shade100,
                 iconColor: Colors.orange,
@@ -88,7 +90,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               const SizedBox(height: 20),
               SettingSwitch(
-                title: "Dark Mode",
+                title: Config.Localization["dark"],
                 icon: Ionicons.earth,
                 bgColor: Colors.purple.shade100,
                 iconColor: Colors.purple,
@@ -101,7 +103,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               const SizedBox(height: 20),
               SettingItem(
-                title: "Help",
+                title: Config.Localization["help"],
                 icon: Ionicons.nuclear,
                 bgColor: Colors.red.shade100,
                 iconColor: Colors.red,

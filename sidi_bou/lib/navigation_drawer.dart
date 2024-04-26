@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:sidi_bou/core/Config.dart';
 
 class navigation_drawer extends StatelessWidget {
   const navigation_drawer({super.key});
@@ -78,8 +78,8 @@ class navigation_drawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text(
-              'Home',
+            title: Text(
+              Config.Localization["Home"],
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
             leading: const Icon(
@@ -91,8 +91,8 @@ class navigation_drawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text(
-              'History',
+            title: Text(
+              Config.Localization["History"],
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
             leading: const Icon(
@@ -101,6 +101,7 @@ class navigation_drawer extends StatelessWidget {
             ), // Add leading icon for History
             onTap: () {
               Navigator.of(context).pushReplacementNamed('HistoriqueScreen');
+
             },
           ),
           ListTile(
@@ -114,6 +115,7 @@ class navigation_drawer extends StatelessWidget {
             ), // Add leading icon for Quizz
             onTap: () {
               Navigator.of(context).pushReplacementNamed('VideoScreen');
+
             },
           ),
           ListTile(
@@ -143,8 +145,8 @@ class navigation_drawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text(
-              'Settings',
+            title: Text(
+              Config.Localization["settings"],
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
             leading: const Icon(
@@ -156,8 +158,8 @@ class navigation_drawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text(
-              'Rate',
+            title: Text(
+              Config.Localization["Rate"],
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
             leading: const Icon(
