@@ -15,8 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       drawer: navigation_drawer(),
       appBar: AppBar(
-        title: Padding(
-          padding: EdgeInsets.only(left: 40.0),
+        title: Center(
           child: Text(
             'Welcome to Sidi Bou App 🪬!',
             style: GoogleFonts.robotoCondensed(

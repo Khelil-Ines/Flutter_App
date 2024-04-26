@@ -74,8 +74,7 @@ class _RateScreenState extends State<RateScreen> {
     return Scaffold(
       drawer: navigation_drawer(),
       appBar: AppBar(
-        title: Padding(
-          padding: EdgeInsets.only(left: 80.0),
+        title: Center(
           child: Text(
             'Rate our App ⭐ !',
             style: GoogleFonts.robotoCondensed(

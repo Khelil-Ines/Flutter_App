@@ -15,8 +15,7 @@ class _HistoriqueScreenState extends State<HistoriqueScreen> {
     return Scaffold(
       drawer: navigation_drawer(),
       appBar: AppBar(
-        title: Padding(
-          padding: EdgeInsets.only(left: 20.0),
+        title: Center(
           child: Text(
             'Learn more about Sidi Bou Said 🪬!',
             style: GoogleFonts.robotoCondensed(
@@ -31,8 +30,7 @@ class _HistoriqueScreenState extends State<HistoriqueScreen> {
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage(
-                  "https://www.boky.tn/wp-content/uploads/2023/07/The-beautiful-towns-of-Northern-Tunisia-Bizerte-and-Sidi-Bou-Said.png"), // Replace with your image URL
+              image: AssetImage('images/history.png'),
               fit: BoxFit.fill,
             ),
           ),
