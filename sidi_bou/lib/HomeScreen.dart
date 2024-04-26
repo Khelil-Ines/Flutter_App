@@ -19,7 +19,9 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Padding(
           padding: EdgeInsets.only(left: 40.0),
           child: Text(
+
             Config.Localization["title"],
+
             style: GoogleFonts.robotoCondensed(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -57,6 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.all(28.0),
                     child: Text(
                       Config.Localization["body"],
+
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.white,
@@ -73,7 +76,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   //   color: Colors.white.withOpacity(0.6),
                   // ),
                   child: Text(
+
                     Config.Localization["press"],
+
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
@@ -92,6 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: BorderRadius.circular(16),
                       color: Colors.blue[900],
                     ),
+
                     child: Text(
                       Config.Localization["btnStart"],
                       style: TextStyle(

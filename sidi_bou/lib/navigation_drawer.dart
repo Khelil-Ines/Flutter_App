@@ -26,11 +26,13 @@ class navigation_drawer extends StatelessWidget {
       // Récupérez l'image de profil à partir des données de l'utilisateur
       String? img = (userSnapshot.data() as Map<String, dynamic>)['imgprofile'];
 
+      String? pseudo = (userSnapshot.data() as Map<String, dynamic>)['pseudo'];
+
       // Retournez un map contenant l'e-mail et l'image de profil
-      return {'email': email, 'img': img};
+      return {'email': email, 'img': img, 'pseudo': pseudo};
     } else {
       // L'utilisateur n'est pas authentifié
-      return {'email': null, 'img': null};
+      return {'email': null, 'img': null, 'pseudo': null};
     }
   }
 
@@ -38,7 +40,6 @@ class navigation_drawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
-        // Important: Remove any padding from the ListView.
         padding: EdgeInsets.zero,
         children: [
           FutureBuilder<Map<String, String?>>(
@@ -51,9 +52,10 @@ class navigation_drawer extends StatelessWidget {
               } else {
                 String? email = snapshot.data?['email'];
                 String? profilePictureUrl = snapshot.data?['img'];
+                String? pseudo = snapshot.data?['pseudo'];
 
                 return UserAccountsDrawerHeader(
-                  accountName: null,
+                  accountName: Text(pseudo ?? ''),
                   accountEmail: Text(email ?? ''),
                   currentAccountPicture: CircleAvatar(
                     backgroundColor: Colors.white,
@@ -99,6 +101,21 @@ class navigation_drawer extends StatelessWidget {
             ), // Add leading icon for History
             onTap: () {
               Navigator.of(context).pushReplacementNamed('HistoriqueScreen');
+
+            },
+          ),
+          ListTile(
+            title: const Text(
+              'Video',
+              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            ),
+            leading: const Icon(
+              Icons.video_file,
+              color: Color.fromARGB(255, 9, 51, 110),
+            ), // Add leading icon for Quizz
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed('VideoScreen');
+
             },
           ),
           ListTile(
@@ -124,7 +141,7 @@ class navigation_drawer extends StatelessWidget {
               color: Color.fromARGB(255, 9, 51, 110),
             ), // Add leading icon for Maps
             onTap: () {
-              //Navigator.of(context).pushReplacementNamed('MapScreen');
+              Navigator.of(context).pushReplacementNamed('MapScreen');
             },
           ),
           ListTile(
@@ -152,6 +169,22 @@ class navigation_drawer extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pushReplacementNamed('RateScreen');
             },
+          ),
+          ListTile(
+            title: const Text(
+              'Leave a comment',
+              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            ),
+            leading: const Icon(
+              Icons.comment,
+              color: Color.fromARGB(255, 9, 51, 110),
+            ), // Add leading icon for Rate
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed('VoiceCommentScreen');
+            },
+          ),
+          SizedBox(
+            height: 50,
           ),
           Center(
             child: MaterialButton(
