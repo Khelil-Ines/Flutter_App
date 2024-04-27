@@ -57,6 +57,8 @@ dependencies:
   speech_to_text: ^6.6.0 
   appinio_video_player: 1.2.2 
   shared_preferences: 2.0.15
+  json_theme: ^6.4.1
+  provider: ^6.1.2
 
 
 
@@ -90,7 +92,9 @@ flutter:
 
     - assets/localization/
     - assets/
-    #- assets/videos/
+    - assets/videos/
+    - assets/themes/
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

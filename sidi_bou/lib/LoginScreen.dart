@@ -17,8 +17,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> signIn() async {
     if (_formKey.currentState!.validate()) {
-      // Validate form before sign in
-      // Form is valid, proceed with sign in logic
       try {
         await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _emailController.text.trim(),
@@ -26,15 +24,35 @@ class _LoginScreenState extends State<LoginScreen> {
         );
         Navigator.of(context).pushNamed('HomeScreen');
       } on FirebaseAuthException catch (error) {
-        setState(() {
-          _errorMessage = error.message; // Set error message
-        });
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('Login Error'),
+            content: Text(
+                error.message ?? 'Failed to sign in with email and password.'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text('OK'),
+              ),
+            ],
+          ),
+        );
       }
     } else {
-      setState(() {
-        _errorMessage =
-            "Please fill all fields before signing in"; // Set error message for empty fields
-      });
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Validation Error'),
+          content: Text("Please fill all fields before signing in"),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text('OK'),
+            ),
+          ],
+        ),
+      );
     }
   }
 

@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sidi_bou/core/Config.dart';
+import 'package:sidi_bou/providers/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 class navigation_drawer extends StatelessWidget {
   const navigation_drawer({super.key});
@@ -101,7 +103,6 @@ class navigation_drawer extends StatelessWidget {
             ), // Add leading icon for History
             onTap: () {
               Navigator.of(context).pushReplacementNamed('HistoriqueScreen');
-
             },
           ),
           ListTile(
@@ -115,7 +116,6 @@ class navigation_drawer extends StatelessWidget {
             ), // Add leading icon for Quizz
             onTap: () {
               Navigator.of(context).pushReplacementNamed('VideoScreen');
-
             },
           ),
           ListTile(
@@ -188,8 +188,9 @@ class navigation_drawer extends StatelessWidget {
           ),
           Center(
             child: MaterialButton(
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
+              onPressed: () async {
+                Provider.of<ThemeProvider>(context, listen: false).resetTheme();
+                await FirebaseAuth.instance.signOut();
                 Navigator.of(context).pushReplacementNamed('LoginScreen');
               },
               child: Text('Sign out'),
