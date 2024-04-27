@@ -49,7 +49,8 @@ class _HistoriqueScreenState extends State<HistoriqueScreen> {
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.8),
+                  //color: Colors.white.withOpacity(0.8),
+                  color: Colors.white,
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(28.0),
@@ -103,4 +104,3 @@ class _HistoriqueScreenState extends State<HistoriqueScreen> {
     );
   }
 }
-

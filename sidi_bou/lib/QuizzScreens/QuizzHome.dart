@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sidi_bou/navigation_drawer.dart';
 
@@ -46,11 +47,10 @@ class _QuizzHomeState extends State<QuizzHome> {
           SizedBox(height: 20),
           Center(
             child: Text(
-              'Top Quizz Categories',
+              "Top Quizz Categories",
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
               ),
             ),
           ),
@@ -69,7 +69,6 @@ class _QuizzHomeState extends State<QuizzHome> {
                         style: TextStyle(
                           fontSize: 70,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
                         ),
                       ),
                       SizedBox(width: 40),
@@ -78,16 +77,18 @@ class _QuizzHomeState extends State<QuizzHome> {
                         style: TextStyle(
                           fontSize: 70,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
                         ),
                       ),
                       SizedBox(width: 40),
-                      Text(
-                        '🍽️',
-                        style: TextStyle(
-                          fontSize: 70,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                      GestureDetector(
+                        onTap: () => Navigator.of(context)
+                            .pushReplacementNamed('QuizzQuestion'),
+                        child: Text(
+                          '🍽️',
+                          style: TextStyle(
+                            fontSize: 70,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ],
@@ -111,7 +112,6 @@ class _QuizzHomeState extends State<QuizzHome> {
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
                         ),
                       ),
                       SizedBox(width: 50),
@@ -120,7 +120,6 @@ class _QuizzHomeState extends State<QuizzHome> {
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
                         ),
                       ),
                       SizedBox(width: 70),
@@ -129,7 +128,6 @@ class _QuizzHomeState extends State<QuizzHome> {
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
                         ),
                       ),
                     ],
@@ -143,4 +141,3 @@ class _QuizzHomeState extends State<QuizzHome> {
     );
   }
 }
-

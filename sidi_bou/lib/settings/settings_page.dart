@@ -8,6 +8,8 @@ import 'package:sidi_bou/settings/set_account.dart';
 import 'package:sidi_bou/widgets/forward_button.dart';
 import 'package:sidi_bou/widgets/setting_item.dart';
 import 'package:sidi_bou/widgets/setting_switch.dart';
+import 'package:sidi_bou/providers/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -17,9 +19,11 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  bool isDarkMode = false;
   @override
   Widget build(BuildContext context) {
+    ThemeProvider _themeProvider = Provider.of<ThemeProvider>(context);
+    bool isDarkMode = _themeProvider.currentTheme == ThemeEnum.Dark;
+
     return BlocBuilder<LangCubit, LangState>(
       builder: (context, state) {
         return Scaffold(
@@ -97,14 +101,18 @@ class _SettingsPageState extends State<SettingsPage> {
                   const SizedBox(height: 20),
                   SettingSwitch(
                     title: Config.Localization["dark"],
-                    icon: Ionicons.earth,
+                    icon: _themeProvider.currentTheme == ThemeEnum.Light
+                        ? Ionicons.sunny
+                        : Ionicons.moon,
                     bgColor: Colors.purple.shade100,
                     iconColor: Colors.purple,
                     value: isDarkMode,
                     onTap: (value) {
-                      setState(() {
-                        isDarkMode = value;
-                      });
+                      if (value) {
+                        _themeProvider.changeTheme(ThemeEnum.Dark);
+                      } else {
+                        _themeProvider.changeTheme(ThemeEnum.Light);
+                      }
                     },
                   ),
                   const SizedBox(height: 20),

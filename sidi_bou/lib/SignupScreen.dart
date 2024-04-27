@@ -13,43 +13,84 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _pseudoController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
-  Future<void> SignUp() async {
-    try {
-      if (passwordConfirmed()) {
-        UserCredential userCredential =
-            await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _emailController.text.trim(),
-          password: _passwordController.text.trim(),
-        );
+  bool isEmailValid(String email) {
+    RegExp emailRegex = RegExp(
+      r'^[a-zA-Z0-9._]+@gmail+\.[a-zA-Z]+',
+      caseSensitive: false,
+    );
+    return emailRegex.hasMatch(email);
+  }
 
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(userCredential.user!.uid)
-            .set({
-          'email': _emailController.text.trim(),
-          'password': _passwordController.text.trim(),
-        });
-        Navigator.of(context).pushNamed('LoginScreen');
-      }
-    } catch (e) {
-      print('Une erreur s\'est produite lors de l\'inscription : $e');
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text('Erreur'),
-          content: Text(
-              'Une erreur s\'est produite lors de la création de votre compte.'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text('OK'),
-            ),
-          ],
-        ),
-      );
+  Future<void> SignUp() async {
+    if (!isEmailValid(_emailController.text.trim())) {
+      showAlertDialog('Error', 'Please enter a valid email address.');
+      return;
     }
+    // Check if any of the fields are empty
+    if (_emailController.text.trim().isEmpty ||
+        _passwordController.text.trim().isEmpty ||
+        _pseudoController.text.trim().isEmpty) {
+      showAlertDialog('Error', 'Please fill in all fields.');
+      return;
+    }
+
+    // Confirm the password
+    if (!passwordConfirmed()) {
+      showAlertDialog('Error', 'Passwords do not match.');
+      return;
+    }
+
+    try {
+      // Attempt to create a new user with email and password
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+
+      // Set additional user information in Firestore
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .set({
+        'email': _emailController.text.trim(),
+        'comments': [],
+        'foodscore': 0,
+        'placescore': 0,
+        'maraboutscore': 0,
+        'imgprofile': null, // Use 'null' instead of 'Null'
+        'pseudo': _pseudoController.text.trim(),
+        'rate': 0
+      });
+
+      // Redirect the user to the login screen upon successful registration
+      Navigator.of(context).pushNamed('HomeScreen');
+    } catch (e) {
+      // Print the error to the console and show an error dialog
+      print('An error occurred during sign up: $e');
+      showAlertDialog('Error',
+          'An error occurred while creating your account. Please try again.');
+    }
+  }
+
+  void showAlertDialog(String title, String content) {
+    // Display an alert dialog with the provided title and content
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(title),
+        content: Text(content),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 
   bool passwordConfirmed() {
@@ -109,6 +150,27 @@ class _SignupScreenState extends State<SignupScreen> {
                           controller: _emailController,
                           decoration: InputDecoration(
                               border: InputBorder.none, hintText: 'Email'),
+                          keyboardType: TextInputType.emailAddress,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  // Nickname
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12)),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: TextField(
+                          controller: _pseudoController,
+                          decoration: InputDecoration(
+                              border: InputBorder.none, hintText: 'Nickname'),
                         ),
                       ),
                     ),
@@ -156,6 +218,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                     ),
                   ),
+
                   SizedBox(
                     height: 15,
                   ),
