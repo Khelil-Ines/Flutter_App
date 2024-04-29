@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sidi_bou/HistoriqueScreen.dart';
-import 'package:sidi_bou/MapScreen.dart';
 import 'package:sidi_bou/QuizzScreens/QuizzHome.dart';
 import 'package:sidi_bou/QuizzScreens/QuizzQuestion.dart';
 import 'package:sidi_bou/RateScreen.dart';
@@ -53,7 +52,6 @@ class MyApp extends StatelessWidget {
               // '/': (context) => const Auth(),
               'SettingScreen': (context) => const SettingsPage(),
               'HomeScreen': (context) => const HomeScreen(),
-              'MapScreen': (context) => const MapScreen(),
               'SignUpScreen': (context) => const SignupScreen(),
               'LoginScreen': (context) => const LoginScreen(),
               'RateScreen': (context) => const RateScreen(),

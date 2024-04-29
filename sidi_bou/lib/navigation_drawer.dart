@@ -131,19 +131,7 @@ class navigation_drawer extends StatelessWidget {
               Navigator.of(context).pushReplacementNamed('QuizzScreen');
             },
           ),
-          ListTile(
-            title: const Text(
-              'Maps',
-              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-            ),
-            leading: const Icon(
-              Icons.map,
-              color: Color.fromARGB(255, 9, 51, 110),
-            ), // Add leading icon for Maps
-            onTap: () {
-              Navigator.of(context).pushReplacementNamed('MapScreen');
-            },
-          ),
+          
           ListTile(
             title: Text(
               Config.Localization["settings"],
