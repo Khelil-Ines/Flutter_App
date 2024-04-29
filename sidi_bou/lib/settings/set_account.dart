@@ -60,28 +60,46 @@ class _SetAccountState extends State<SetAccount> {
   var pseudoController = TextEditingController();
 
   Future<void> pickImage() async {
+    // Get current user
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Aucun utilisateur connecté.'),
+      ));
+      return;
+    }
+
+    // Step 1: Pick the image
     final FilePickerResult? result =
         await FilePicker.platform.pickFiles(type: FileType.image);
 
     if (result != null) {
       File file = File(result.files.single.path!);
+      String userId = user.uid;
 
-      DocumentReference imageDoc =
-          await FirebaseFirestore.instance.collection('users').add({
-        'imgprofile': '',
-      });
-      Reference imageRef = FirebaseStorage.instance.ref(imageDoc.id + '.jpg');
+      // Step 2: Upload the image to Firebase Storage using the user ID as part of the image name
+      Reference imageRef = FirebaseStorage.instance.ref('${userId}.jpg');
       await imageRef.putFile(file);
-      imageURL = await imageRef.getDownloadURL();
 
-      imageDoc.update({'imgProfile': imageURL});
+      // Step 3: Get the download URL of the uploaded image
+      String imageURL = await imageRef.getDownloadURL();
+
+      // Step 4: Update the Firestore document with the new image URL
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .update({'imgprofile': imageURL});
+
+      // Update UI and show a success message
       setState(() {});
-
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('Image modifiée avec succès !'),
-      )); // Afficher un message de succès
+      ));
     } else {
-      // Gérer le cas où l'utilisateur annule la sélection de l'image
+      // Handle the case where the user cancels the image selection
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Sélection d\'image annulée'),
+      ));
     }
   }
 
@@ -287,28 +305,6 @@ class _SetAccountState extends State<SetAccount> {
                   padding: const EdgeInsets.only(right: 10, bottom: 10),
                   child: ElevatedButton(
                     onPressed: () async {
-                      if (emailController.value.text.isNotEmpty) {
-                        try {
-                          await FirebaseAuth.instance.currentUser!
-                              .updateDisplayName(emailController.text);
-                          // Mettez à jour l'email' dans Firestore
-                          String userId =
-                              FirebaseAuth.instance.currentUser!.uid;
-                          await FirebaseFirestore.instance
-                              .collection('users')
-                              .doc(userId)
-                              .update({'email': emailController.text});
-                          if (!mounted) return;
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const SettingsPage()));
-                        } catch (e) {
-                          if (kDebugMode) {
-                            print(e);
-                          }
-                        }
-                      }
                       if (pseudoController.value.text.isNotEmpty) {
                         try {
                           await FirebaseAuth.instance.currentUser!

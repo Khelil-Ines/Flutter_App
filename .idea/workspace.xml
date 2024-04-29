@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="73e6016c-00ff-4991-a1a0-0b718b8ba2d6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/sidi_bou/lib/HistoriqueScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sidi_bou/lib/HistoriqueScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sidi_bou/lib/HomeScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sidi_bou/lib/HomeScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sidi_bou/lib/LoginScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sidi_bou/lib/LoginScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sidi_bou/lib/MapScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sidi_bou/lib/MapScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sidi_bou/lib/QuizzScreens/QuizzHome.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sidi_bou/lib/QuizzScreens/QuizzHome.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sidi_bou/lib/RateScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sidi_bou/lib/RateScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sidi_bou/lib/SignupScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sidi_bou/lib/SignupScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Flutter_App.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Flutter_App.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sidi_bou/lib/settings/set_account.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sidi_bou/lib/settings/set_account.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
