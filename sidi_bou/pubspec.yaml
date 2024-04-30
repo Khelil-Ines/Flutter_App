@@ -59,6 +59,7 @@ dependencies:
   shared_preferences: 2.0.15
   json_theme: ^6.4.1
   provider: ^6.1.2
+  responsive_sizer: 3.3.1
 
 
 

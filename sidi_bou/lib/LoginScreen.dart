@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sidi_bou/ForgotPass.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -58,6 +59,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void openSignupScreen() {
     Navigator.of(context).pushReplacementNamed('SignUpScreen');
+  }
+
+  void openForgotPass() {
+    Navigator.of(context).pushReplacementNamed('ForgotPass');
   }
 
   @override
@@ -200,6 +205,28 @@ class _LoginScreenState extends State<LoginScreen> {
                         onTap: openSignupScreen,
                         child: Text(
                           'Sign up here',
+                          style: GoogleFonts.robotoCondensed(
+                            color: Colors.red[500],
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Forgot Password ?',
+                        style: GoogleFonts.robotoCondensed(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: openForgotPass,
+                        child: Text(
+                          'Change it ',
                           style: GoogleFonts.robotoCondensed(
                             color: Colors.red[500],
                             fontWeight: FontWeight.bold,
