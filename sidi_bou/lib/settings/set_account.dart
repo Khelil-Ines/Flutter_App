@@ -184,32 +184,6 @@ class _SetAccountState extends State<SetAccount> {
                     } else if (snapshot.hasError) {
                       return Text('Error: ${snapshot.error}');
                     } else {
-                      String? userPseudo = snapshot.data?['pseudo'];
-
-                      return TextField(
-                        controller: pseudoController,
-                        decoration: InputDecoration(
-                          hintText: userPseudo ?? '',
-                          hintStyle: TextStyle(
-                            color: Colors.grey,
-                            fontStyle: FontStyle.italic,
-                          ),
-                        ),
-                      );
-                    }
-                  },
-                ),
-                title: "Pseudo",
-              ),
-              EditItem(
-                widget: FutureBuilder<Map<String, String?>>(
-                  future: widget.getUserInfo(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator();
-                    } else if (snapshot.hasError) {
-                      return Text('Error: ${snapshot.error}');
-                    } else {
                       String? userEmail = snapshot.data?['email'];
 
                       return TextField(
@@ -226,6 +200,32 @@ class _SetAccountState extends State<SetAccount> {
                   },
                 ),
                 title: "Email",
+              ),
+              EditItem(
+                widget: FutureBuilder<Map<String, String?>>(
+                  future: widget.getUserInfo(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator();
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else {
+                      String? userPseudo = snapshot.data?['pseudo'];
+
+                      return TextField(
+                        controller: pseudoController,
+                        decoration: InputDecoration(
+                          hintText: userPseudo ?? '',
+                          hintStyle: TextStyle(
+                            color: Colors.grey,
+                            fontStyle: FontStyle.italic,
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                ),
+                title: "Pseudo",
               ),
               SizedBox(height: 40),
               Text(
