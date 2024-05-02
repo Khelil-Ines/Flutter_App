@@ -270,7 +270,7 @@ class _VoiceCommentScreenState extends State<VoiceCommentScreen> {
             ),
           ),
         ),
-        backgroundColor: Colors.blue[600],
+        backgroundColor: Color(0xFF1E88E5),
       ),
       body: Center(
         child: Column(
