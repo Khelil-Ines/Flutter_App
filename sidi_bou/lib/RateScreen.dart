@@ -40,7 +40,7 @@ class _RateScreenState extends State<RateScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-            Config.Localization["rate"],
+              Config.Localization["thanks"],
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
             ),
