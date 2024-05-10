@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sidi_bou/core/Config.dart';
 import 'package:sidi_bou/navigation_drawer.dart';
 
 class QuizzHome extends StatefulWidget {
@@ -44,18 +45,18 @@ class _QuizzHomeState extends State<QuizzHome> {
               ),
             ),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 60),
           Center(
             child: Text(
               "Top Quizz Categories",
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 40,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
           SizedBox(
-            height: 40,
+            height: 60,
           ),
           Row(
             children: [
@@ -64,44 +65,52 @@ class _QuizzHomeState extends State<QuizzHome> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Column(
-                        children: [
-                          Text(
-                            '🧔🏻',
-                            style: TextStyle(
-                              fontSize: 70,
-                              fontWeight: FontWeight.bold,
+                      GestureDetector(
+                        onTap: () => Navigator.of(context)
+                            .pushReplacementNamed('QuizzMarabouts'),
+                        child: Column(
+                          children: [
+                            Text(
+                              '🧔🏻',
+                              style: TextStyle(
+                                fontSize: 70,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          Text(
-                            'Marabouts',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                            Text(
+                              'Marabouts',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                      SizedBox(width: 40),
-                      Column(
-                        children: [
-                          Text(
-                            '📌',
-                            style: TextStyle(
-                              fontSize: 70,
-                              fontWeight: FontWeight.bold,
+                      SizedBox(width: 60),
+                      GestureDetector(
+                        onTap: () => Navigator.of(context)
+                            .pushReplacementNamed('QuizzPlace'),
+                        child: Column(
+                          children: [
+                            Text(
+                              '📌',
+                              style: TextStyle(
+                                fontSize: 70,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          Text(
-                            'Places',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                            Text(
+                              'Places',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                      SizedBox(width: 40),
+                      SizedBox(width: 60),
                       GestureDetector(
                         onTap: () => Navigator.of(context)
                             .pushReplacementNamed('QuizzQuestion'),
@@ -115,7 +124,7 @@ class _QuizzHomeState extends State<QuizzHome> {
                               ),
                             ),
                             Text(
-                              'Food',
+                              Config.Localization["Quizz"],
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
