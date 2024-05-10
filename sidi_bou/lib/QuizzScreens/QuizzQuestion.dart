@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class QuizzQuestion extends StatefulWidget {
-  const QuizzQuestion({super.key});
+  const QuizzQuestion({Key? key}) : super(key: key);
 
   @override
   State<QuizzQuestion> createState() => _QuizzQuestionState();
@@ -11,28 +11,118 @@ class _QuizzQuestionState extends State<QuizzQuestion> {
   List<Map<String, dynamic>> questions = [
     {
       'questionText': 'What is this called?',
+      'imagePath': 'images/bambalouni2.png',
       'answers': ['Bambalouni', 'Balbalouni', 'Banbalouni'],
       'correctAnswerIndex': 0,
     },
     {
       'questionText': 'What famous Coffee Shop is this?',
-      'answers': ['Delta Coffe Shop', 'Delice Coffee Shop', 'Sidi Coffee Shop'],
+      'answers': [
+        'Delta Coffee Shop',
+        'Delice Coffee Shop',
+        'Sidi Coffee Shop'
+      ],
+      'imagePath': 'images/cafe.jpg',
       'correctAnswerIndex': 1,
     },
   ];
   int questionIndex = 0;
   int score = 0;
 
+  late BuildContext
+      _scaffoldContext; // Déclarez une variable pour stocker le contexte
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.blue[700],
+      body: SafeArea(
+        child: Padding(
+          padding:
+              const EdgeInsets.symmetric(horizontal: 10.0).copyWith(bottom: 40),
+          child: Builder(
+            builder: (BuildContext scaffoldContext) {
+              _scaffoldContext = scaffoldContext; // Stockez le contexte
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Expanded(
+                    flex:
+                        5, // Give more weight to the question and answer section
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        children: [
+                          SizedBox(height: 40),
+                          Text(
+                            questions[questionIndex]['questionText'],
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 40.0,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(height: 40),
+                          Expanded(
+                            flex: 1, // Give less weight to the image section
+                            child: SizedBox(
+                              height: 200, // Adjust the height as needed
+                              child: Image.asset(
+                                questions[questionIndex]['imagePath'],
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 30),
+                        ],
+                      ),
+                    ),
+                  ),
+                  ..._buildAnswerButtons(),
+                ],
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  List<Widget> _buildAnswerButtons() {
+    return questions[questionIndex]['answers']
+        .asMap()
+        .entries
+        .map<Widget>((entry) {
+      int idx = entry.key;
+      String answer = entry.value;
+      return Expanded(
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.white,
+              textStyle: const TextStyle(fontSize: 25.0),
+              iconColor: Colors.white,
+            ),
+            onPressed: () => checkAnswer(idx),
+            child: Text(answer),
+          ),
+        ),
+      );
+    }).toList();
+  }
+
   void checkAnswer(int selectedIndex) {
     if (selectedIndex == questions[questionIndex]['correctAnswerIndex']) {
       score++;
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(_scaffoldContext).showSnackBar(SnackBar(
         content: Text('Correct!'),
         backgroundColor: Colors.green,
         duration: Duration(seconds: 1),
       ));
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(_scaffoldContext).showSnackBar(SnackBar(
         content: Text('Wrong!'),
         backgroundColor: Colors.red,
         duration: Duration(seconds: 1),
@@ -71,63 +161,5 @@ class _QuizzQuestionState extends State<QuizzQuestion> {
         ),
       );
     }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    List<Widget> answerButtons = questions[questionIndex]['answers']
-        .asMap()
-        .entries
-        .map<Widget>((entry) {
-      int idx = entry.key;
-      String answer = entry.value;
-      return Expanded(
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: TextButton(
-            style: TextButton.styleFrom(
-              backgroundColor: Colors.white,
-              textStyle: const TextStyle(fontSize: 20.0),
-              iconColor: Colors.white,
-            ),
-            onPressed: () => checkAnswer(idx),
-            child: Text(answer),
-          ),
-        ),
-      );
-    }).toList();
-
-    return Scaffold(
-      backgroundColor: Colors.blue[700],
-      body: SafeArea(
-        child: Padding(
-          padding:
-              const EdgeInsets.symmetric(horizontal: 10.0).copyWith(bottom: 40),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Expanded(
-                flex: 5,
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Center(
-                    child: Text(
-                      questions[questionIndex]['questionText'],
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 25.0,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              ...answerButtons, // Spread operator to include all buttons
-            ],
-          ),
-        ),
-      ),
-    );
   }
 }

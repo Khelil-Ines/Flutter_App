@@ -1,13 +1,17 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sidi_bou/ForgotPass.dart';
 import 'package:sidi_bou/HistoriqueScreen.dart';
 import 'package:sidi_bou/QuizzScreens/QuizzHome.dart';
 import 'package:sidi_bou/QuizzScreens/QuizzQuestion.dart';
+import 'package:sidi_bou/QuizzScreens/QuizzPlace.dart';
+import 'package:sidi_bou/QuizzScreens/QuizzMarabouts.dart';
 import 'package:sidi_bou/RateScreen.dart';
+//import 'package:sidi_bou/SplashScreen.dart';
 import 'package:sidi_bou/VoiceCommentScreen.dart';
 import 'package:sidi_bou/auth.dart';
 import 'package:sidi_bou/core/Config.dart';
@@ -28,6 +32,8 @@ void main() async {
   await Config.LoadLanguage(lang);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await ThemeProvider.instance.changeTheme(ThemeEnum.Light);
+  //await Future.delayed(const Duration(seconds: 1));
+  //FlutterNativeSplash.remove();
   runApp(const MyApp());
 }
 
@@ -48,9 +54,9 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Sidi Bou Said',
             theme: Provider.of<ThemeProvider>(context).currentThemeData,
-            home: const Auth(),
+            home: Auth(),
             routes: {
-              // '/': (context) => const Auth(),
+              //'/': (context) => const Auth(),
               'SettingScreen': (context) => const SettingsPage(),
               'HomeScreen': (context) => const HomeScreen(),
               'SignUpScreen': (context) => const SignupScreen(),
@@ -61,9 +67,10 @@ class MyApp extends StatelessWidget {
               'QuizzScreen': (context) => const QuizzHome(),
               'VideoScreen': (context) => const VideoPlayerPage(),
               'QuizzQuestion': (context) => const QuizzQuestion(),
+              'QuizzPlace': (context) => const QuizzPlace(),
+              'QuizzMarabouts': (context) => const QuizzMarabouts(),
               'ForgotPass': (context) => const ForgotPass(),
-
-
+              //'SplashScreen': (context) => SplashScreen(),
             },
           );
         });

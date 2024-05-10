@@ -175,6 +175,7 @@ class _SetAccountState extends State<SetAccount> {
                   },
                 ),
               ),
+              SizedBox(height: 20),
               EditItem(
                 widget: FutureBuilder<Map<String, String?>>(
                   future: widget.getUserInfo(),
@@ -186,14 +187,12 @@ class _SetAccountState extends State<SetAccount> {
                     } else {
                       String? userEmail = snapshot.data?['email'];
 
-                      return TextField(
-                        controller: emailController,
-                        decoration: InputDecoration(
-                          hintText: userEmail ?? '',
-                          hintStyle: TextStyle(
-                            color: Colors.grey,
-                            fontStyle: FontStyle.italic,
-                          ),
+                      return Text(
+                        userEmail ??
+                            '', // Utilisez le courriel de l'utilisateur s'il est disponible, sinon une chaîne vide
+                        style: TextStyle(
+                          color: Colors.black, // Couleur du texte
+                          fontStyle: FontStyle.italic, // Style du texte
                         ),
                       );
                     }
@@ -201,6 +200,7 @@ class _SetAccountState extends State<SetAccount> {
                 ),
                 title: "Email",
               ),
+              SizedBox(height: 20),
               EditItem(
                 widget: FutureBuilder<Map<String, String?>>(
                   future: widget.getUserInfo(),
@@ -228,6 +228,48 @@ class _SetAccountState extends State<SetAccount> {
                 title: "Pseudo",
               ),
               SizedBox(height: 40),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 10, bottom: 10),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      if (pseudoController.value.text.isNotEmpty) {
+                        try {
+                          await FirebaseAuth.instance.currentUser!
+                              .updateDisplayName(pseudoController.text);
+                          // Mettez à jour l'email' dans Firestore
+                          String userId =
+                              FirebaseAuth.instance.currentUser!.uid;
+                          await FirebaseFirestore.instance
+                              .collection('users')
+                              .doc(userId)
+                              .update({'pseudo': pseudoController.text});
+                          if (!mounted) return;
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SettingsPage()));
+                        } catch (e) {
+                          if (kDebugMode) {
+                            print(e);
+                          }
+                        }
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      fixedSize: const Size(68, 58),
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white,
+                    ),
+                    child: const Icon(Ionicons.checkmark),
+                  ),
+                ),
+              ),
+              //SizedBox(height: 40),
               Text(
                 Config.Localization["pwd"],
                 style: TextStyle(
@@ -296,48 +338,6 @@ class _SetAccountState extends State<SetAccount> {
                     }
                   },
                   child: Text(Config.Localization["update"]),
-                ),
-              ),
-              SizedBox(height: 40),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 10, bottom: 10),
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      if (pseudoController.value.text.isNotEmpty) {
-                        try {
-                          await FirebaseAuth.instance.currentUser!
-                              .updateDisplayName(pseudoController.text);
-                          // Mettez à jour l'email' dans Firestore
-                          String userId =
-                              FirebaseAuth.instance.currentUser!.uid;
-                          await FirebaseFirestore.instance
-                              .collection('users')
-                              .doc(userId)
-                              .update({'pseudo': pseudoController.text});
-                          if (!mounted) return;
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const SettingsPage()));
-                        } catch (e) {
-                          if (kDebugMode) {
-                            print(e);
-                          }
-                        }
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      fixedSize: const Size(68, 58),
-                      backgroundColor: Colors.blue,
-                      foregroundColor: Colors.white,
-                    ),
-                    child: const Icon(Ionicons.checkmark),
-                  ),
                 ),
               ),
             ],

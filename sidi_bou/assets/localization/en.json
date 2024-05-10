@@ -47,5 +47,7 @@
     "listen":"listening ...",
     "tapMic":"Tap the microphone to start listening...",
     "notAvailable":"Speech not available",
-    "yourCmt":"Your comment here ..."
+    "yourCmt":"Your comment here ...",
+
+    "Quizz":"Food"
 }
